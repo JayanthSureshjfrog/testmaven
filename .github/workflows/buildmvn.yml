@@ -44,7 +44,8 @@ jobs:
            #JF_USER: ${{ vars.JF_USER }}
            #JF_ACCESS_TOKEN: ${{ vars.JF_ACCESS_TOKEN }}                  
          with:
-           oidc-provider-name: destgithub
+           oidc-provider-name: jay-oidc 
+           oidc-audience: jay-oidc-audience
            
        - name: Check connectivity
          run: |
