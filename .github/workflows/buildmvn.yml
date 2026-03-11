@@ -14,9 +14,9 @@ jobs:
      runs-on: ubuntu-latest
      env:
        JFROG_CLI_LOG_LEVEL: DEBUG
-       MODULE_NAME: 'infymvnmodule'
-       PLATFORM_REPO: 'Infosys-mvn-dev-virtual'
-       BUILD_NAME: "infymvn-build"
+       MODULE_NAME: 'testmvnmodule'
+       PLATFORM_REPO: 'jay-maven-dev-virtual '
+       BUILD_NAME: "testmvn-build"
        BUILD_NUMBER: "${{github.run_number}}"
        
     # defaults:
