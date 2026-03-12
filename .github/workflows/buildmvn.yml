@@ -61,15 +61,15 @@ jobs:
            
        - name: Mvn Clean Install
          run: |
-           jf mvn clean install -U --build-name=$BUILD_NAME --build-number=$BUILD_NUMBER --module $MODULE_NAME
+           jf mvn clean install -U --build-name=$BUILD_NAME --build-number=$BUILD_NUMBER --module $MODULE_NAME --project jay
          
        - name: Publish Build info With JFrog CLI
          run: |
           # Collect environment variables for the build
-          jf rt build-collect-env $BUILD_NAME $BUILD_NUMBER 
+          jf rt build-collect-env $BUILD_NAME $BUILD_NUMBER --project jay
           
           # Collect VCS details from git and add them to the build 
-          jf rt build-add-git $BUILD_NAME $BUILD_NUMBER 
+          jf rt build-add-git $BUILD_NAME $BUILD_NUMBER --project jay
           
           # Publish build info 
           jf rt build-publish $BUILD_NAME $BUILD_NUMBER --project jay
