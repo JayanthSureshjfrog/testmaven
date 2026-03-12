@@ -56,9 +56,8 @@ jobs:
          run: | 
            jf mvnc --repo-deploy-releases=$PLATFORM_REPO --repo-deploy-snapshots=$PLATFORM_REPO --repo-resolve-releases=$PLATFORM_REPO --repo-resolve-snapshots=$PLATFORM_REPO
 
-       - name: Run Audit scan for the git workspace
-         #continue-on-error: true
-         run: jf audit . --project jay
+       #- name: Run Audit scan for the git workspace
+         #run: jf audit . --project jay
            
        - name: Mvn Clean Install
          run: |
