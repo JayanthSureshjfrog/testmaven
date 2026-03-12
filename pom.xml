@@ -16,12 +16,12 @@
         <repository>
             <id>central</id>
             <name>cgsbluecherry-mvn-dev-virtual</name>
-            <url>https://psblr.jfrog.io/artifactory/cgsbluecherry-mvn-dev-virtual</url>
+            <url>https://psblr.jfrog.io/artifactory/jay-maven-dev-virtual</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>cgsbluecherry-mvn-dev-virtual</name>
-            <url>https://psblr.jfrog.io/artifactory/cgsbluecherry-mvn-dev-virtual</url>
+            <url>https://psblr.jfrog.io/artifactory/jay-maven-dev-virtual</url>
         </snapshotRepository>
     </distributionManagement>
 
