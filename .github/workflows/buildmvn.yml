@@ -14,9 +14,9 @@ jobs:
      runs-on: ubuntu-latest
      env:
        JFROG_CLI_LOG_LEVEL: DEBUG
-       MODULE_NAME: 'testmvnmodule'
-       PLATFORM_REPO: 'jay-maven-dev-virtual'
-       BUILD_NAME: "testmvn-build"
+       MODULE_NAME: 'infymvnmodule'
+       PLATFORM_REPO: 'Infosys-mvn-dev-virtual'
+       BUILD_NAME: "infymvn-build"
        BUILD_NUMBER: "${{github.run_number}}"
        
     # defaults:
@@ -44,8 +44,7 @@ jobs:
            #JF_USER: ${{ vars.JF_USER }}
            #JF_ACCESS_TOKEN: ${{ vars.JF_ACCESS_TOKEN }}                  
          with:
-           oidc-provider-name: jay-oidc 
-           oidc-audience: jay-oidc-audience
+           oidc-provider-name: destgithub
            
        - name: Check connectivity
          run: |
@@ -55,21 +54,24 @@ jobs:
        - name: Set Maven Config
          run: | 
            jf mvnc --repo-deploy-releases=$PLATFORM_REPO --repo-deploy-snapshots=$PLATFORM_REPO --repo-resolve-releases=$PLATFORM_REPO --repo-resolve-snapshots=$PLATFORM_REPO
+
+       - name: Run Audit scan for the git workspace
+         run: jf audit . 
            
        - name: Mvn Clean Install
          run: |
-           jf mvn clean install -U --build-name=$BUILD_NAME --build-number=$BUILD_NUMBER --module $MODULE_NAME --project jay
+           jf mvn clean install -U --build-name=$BUILD_NAME --build-number=$BUILD_NUMBER --module $MODULE_NAME
          
        - name: Publish Build info With JFrog CLI
          run: |
           # Collect environment variables for the build
-          jf rt build-collect-env $BUILD_NAME $BUILD_NUMBER --project jay
+          jf rt build-collect-env $BUILD_NAME $BUILD_NUMBER 
           
           # Collect VCS details from git and add them to the build 
-          jf rt build-add-git $BUILD_NAME $BUILD_NUMBER --project jay
+          jf rt build-add-git $BUILD_NAME $BUILD_NUMBER 
           
           # Publish build info 
-          jf rt build-publish $BUILD_NAME $BUILD_NUMBER --project jay
+          jf rt build-publish $BUILD_NAME $BUILD_NUMBER
           
        - name: Run build scan
-         run: jf build-scan $BUILD_NAME  $BUILD_NUMBER --project jay
+         run: jf build-scan $BUILD_NAME  $BUILD_NUMBER
